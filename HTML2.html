@@ -5,25 +5,39 @@
     <title>Level 2: Digital Chatter</title>
     <style>
         body { font-family: monospace; background-color: #1e1e1e; color: #00ff00; padding: 20px; }
-        .log { font-size: 12px; line-height: 1.2; }
+        .dashboard { max-width: 800px; margin: auto; border: 1px solid #00ff00; padding: 20px; background: #111; }
+        .briefing { background: #222; border-left: 4px solid #ffaa00; padding: 10px; margin-bottom: 20px; color: #ddd; }
+        .log-box { height: 400px; overflow-y: scroll; border: 1px solid #444; padding: 10px; background: #000; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <h1>Server Log Analysis</h1>
-    <p>Hunters hide their tracks in massive amounts of data. Find the word "BOUNTY" in this log to locate the next flag.</p>
-    <hr>
-    <div class="log">
-        <script>
-            // This script generates a massive wall of text to force students to use Ctrl+F
-            for(let i = 1; i <= 800; i++) {
-                if (i === 642) {
-                    document.write("<p>SYSTEM ALERT: UNAUTHORIZED ACCESS DETECTED. " + 
-                                   "</p>");
-                } else {
-                    document.write("<p>Log Entry " + i + ": Connection stable. Packet verified. No anomalies detected.</p>");
+    <div class="dashboard">
+        <h2>⚠️ Level 2: Log Analysis</h2>
+        
+        <div class="briefing">
+            <strong>Situation Report:</strong>
+            <p>You have intercepted a live server log. Hunters know that security teams are busy, so they hide their attacks inside thousands of lines of normal "digital chatter," hoping you'll get tired of reading.</p>
+        </div>
+
+        <h3>Your Objective</h3>
+        <p>The Hunter tagged their file with the word <strong>BOUNTY</strong>. You must find it in the log below.</p>
+
+        <h3>Action Steps</h3>
+        <p>Scrolling will take too long. Work smarter, not harder.</p>
+        <p>Use your keyboard: Press <strong>Ctrl + F</strong> (or Cmd + F on a Mac) to open the search tool. Type the word BOUNTY to instantly jump to the hidden flag.</p>
+        
+        <div class="log-box">
+            <script>
+                // Generates the wall of text
+                for(let i = 1; i <= 800; i++) {
+                    if (i === 642) {
+                        document.write("<p style='color:#ff0000;'>SYSTEM ALERT: UNAUTHORIZED ACCESS. </p>");
+                    } else {
+                        document.write("<p>Log Entry " + i + ": Connection stable. TCP packet verified. No anomalies detected.</p>");
+                    }
                 }
-            }
-        </script>
+            </script>
+        </div>
     </div>
 </body>
 </html>

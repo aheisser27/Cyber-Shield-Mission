@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>The First Door</title>
+    <meta charset="UTF-8">
+    <title>Level 1: The First Door</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; padding: 40px; line-height: 1.6; }
+        .dashboard { max-width: 700px; margin: auto; background: white; border-top: 5px solid #4CAF50; padding: 30px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border-radius: 5px; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .briefing { background: #e8f5e9; padding: 15px; border-left: 4px solid #4CAF50; margin-bottom: 20px; }
+        .action { font-weight: bold; color: #d32f2f; }
+    </style>
 </head>
-<body style="background-color:#f0f0f0; font-family:sans-serif; text-align:center;">
-    <h1>Welcome, Defender</h1>
-    <p>The "Shield" begins with seeing what others miss.</p>
-    <p>Right-click this page and "View Page Source" to find your first flag.</p>
-    
+<body>
+    <div class="dashboard">
+        <h1>🛡️ Level 1: The Apprentice</h1>
+        
+        <div class="briefing">
+            <strong>Situation Report:</strong> 
+            <p>Every website you visit is built on raw code. The "Hunter" often leaves footprints in this code, assuming regular users will never look behind the curtain. As a Defender, your first skill is learning how to see the invisible.</p>
+        </div>
+
+        <h3>Your Objective</h3>
+        <ul>
+            <li>Find the hidden "Flag" left by the Hunter.</li>
+            <li>It looks like this: <code>FLAG{SOME_TEXT_HERE}</code>.</li>
+        </ul>
+
+        <h3>Action Steps</h3>
+        <p>1. <span class="action">Right-click</span> anywhere on the white space of this page.</p>
+        <p>2. Select <span class="action">"View Page Source"</span> from the menu.</p>
+        <p>3. Look for the green text (these are called HTML Comments). Find the flag and report it!</p>
+    </div>
+
     </body>
 </html>

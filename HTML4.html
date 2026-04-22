@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 4: Ghost in the Machine</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #050505; color: #eee; padding: 40px; text-align: center; }
+        .dashboard { max-width: 700px; margin: auto; background: #151515; padding: 30px; border: 1px solid #333; }
+        .glitch { font-size: 2.5em; color: #ff003c; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .briefing { text-align: left; background: #222; border-left: 4px solid #ff003c; padding: 15px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="glitch">System Compromised</div>
+        
+        <div class="briefing">
+            <strong>Situation Report:</strong>
+            <p>The HTML source code is completely clean. The Hunter didn't leave the flag on the page. However, web browsers have hidden diagnostic tools called "Developer Tools" that record scripts running in the background.</p>
+        </div>
+
+        <h3 style="text-align: left;">Your Objective</h3>
+        <p style="text-align: left;">Find the Hunter's footprint hidden inside the browser's diagnostic console.</p>
+
+        <h3 style="text-align: left;">Action Steps</h3>
+        <ul style="text-align: left; line-height: 1.8;">
+            <li>Press the <strong>F12</strong> key on your keyboard (or right-click the page and click "Inspect").</li>
+            <li>A new menu will pop up on your screen.</li>
+            <li>Look at the top tabs of that new menu and click on the one that says <strong>Console</strong>.</li>
+            <li>Read the system warnings to find the final flag.</li>
+        </ul>
+    </div>
+
+    <script>
+        console.warn("WARNING: Unauthorized script executed.");
+        console.info("Hunter Footprint Identified in the Network layer.");
+        console.log("Here is your Elite Bounty: FLAG{GHOST_IN_THE_NETWORK_FOUND}");
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Shield Mission Hub</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #f0f0f0; margin: 0; padding: 40px; }
+        .container { max-width: 800px; margin: auto; background: #2d2d2d; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        h1 { color: #4CAF50; text-align: center; }
+        .level-card { border: 1px solid #4CAF50; margin: 15px 0; padding: 15px; border-radius: 5px; background: #222; }
+        a { color: #4CAF50; font-size: 1.2em; text-decoration: none; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+        details { margin-top: 10px; background: #333; padding: 10px; border-radius: 4px; }
+        summary { cursor: pointer; color: #ffaa00; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🛡️ The Cyber Shield Mission Hub</h1>
+    <p>Welcome, Defenders. Your objective is to find the hidden "Flags" in each of the targets below. A flag looks like this: <strong>FLAG{EXAMPLE_TEXT}</strong>. Start at Level 1 and work your way up. If you get stuck, click the "Need a hint?" dropdown.</p>
+
+    <div class="level-card">
+        <a href="Level1.html" target="_blank">Target 1: The Apprentice (Easy)</a>
+        <p>The "Shield" begins with seeing what others miss. Can you translate the web page into its raw code?</p>
+        <details>
+            <summary>Need a hint?</summary>
+            <p>Right-click anywhere on the white background of the target page and click 'View Page Source'. Look for the green text!</p>
+        </details>
+    </div>
+
+    <div class="level-card">
+        <a href="Level2.html" target="_blank">Target 2: The Analyst (Medium)</a>
+        <p>Hunters hide their tracks in massive amounts of data. Find the "BOUNTY" in the noise.</p>
+        <details>
+            <summary>Need a hint?</summary>
+            <p>You are scrolling too fast. Use the keyboard shortcut <strong>Ctrl + F</strong> and type the word BOUNTY.</p>
+        </details>
+    </div>
+
+    <div class="level-card">
+        <a href="Level3.html" target="_blank">Target 3: The Specialist (Hard)</a>
+        <p>The Hunter scrambled the data using Base64. You will need external tools to decode it.</p>
+        <details>
+            <summary>Need a hint?</summary>
+            <p>Highlight the scrambled text, copy it, and open a new tab. Google 'Base64 Decoder' or 'CyberChef', paste the text in, and decode it.</p>
+        </details>
+    </div>
+
+    <div class="level-card">
+        <a href="Level4.html" target="_blank">Target 4: The Elite (Extra Hard)</a>
+        <p>The HTML is clean. You need to dig deeper into the browser's developer tools.</p>
+        <details>
+            <summary>Need a hint?</summary>
+            <p>Hit the <strong>F12</strong> key on your keyboard, then look for the tab that says 'Console' at the top of that new menu.</p>
+        </details>
+    </div>
+</div>
+
+</body>
+</html>

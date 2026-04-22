@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 2: Digital Chatter</title>
+    <style>
+        body { font-family: monospace; background-color: #1e1e1e; color: #00ff00; padding: 20px; }
+        .log { font-size: 12px; line-height: 1.2; }
+    </style>
+</head>
+<body>
+    <h1>Server Log Analysis</h1>
+    <p>Hunters hide their tracks in massive amounts of data. Find the word "BOUNTY" in this log to locate the next flag.</p>
+    <hr>
+    <div class="log">
+        <script>
+            // This script generates a massive wall of text to force students to use Ctrl+F
+            for(let i = 1; i <= 800; i++) {
+                if (i === 642) {
+                    document.write("<p>SYSTEM ALERT: UNAUTHORIZED ACCESS DETECTED. " + 
+                                   "</p>");
+                } else {
+                    document.write("<p>Log Entry " + i + ": Connection stable. Packet verified. No anomalies detected.</p>");
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

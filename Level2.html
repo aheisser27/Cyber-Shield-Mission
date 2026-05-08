@@ -28,10 +28,11 @@
         
         <div class="log-box">
             <script>
-                // Generates the wall of text
-                for(let i = 1; i <= 800; i++) {
-                    if (i === 642) {
-                        document.write("<p style='color:#ff0000;'>SYSTEM ALERT: UNAUTHORIZED ACCESS. </p>");
+                // Generates the wall of text - increased to 3000 to punish manual scrolling
+                for(let i = 1; i <= 3000; i++) {
+                    if (i === 1842) {
+                        // The flag is now perfectly camouflaged in the standard green text
+                        document.write("<p>Log Entry " + i + ": Connection stable. TCP packet verified. BOUNTY: FLAG{ANALYST_BOUNTY_FOUND}. No anomalies detected.</p>");
                     } else {
                         document.write("<p>Log Entry " + i + ": Connection stable. TCP packet verified. No anomalies detected.</p>");
                     }

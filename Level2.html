@@ -7,7 +7,10 @@
         body { font-family: monospace; background-color: #1e1e1e; color: #00ff00; padding: 20px; }
         .dashboard { max-width: 800px; margin: auto; border: 1px solid #00ff00; padding: 20px; background: #111; }
         .briefing { background: #222; border-left: 4px solid #ffaa00; padding: 10px; margin-bottom: 20px; color: #ddd; }
-        .log-box { height: 400px; overflow-y: scroll; border: 1px solid #444; padding: 10px; background: #000; margin-top: 20px; }
+        .log-box { height: 400px; overflow-y: scroll; border: 1px solid #444; padding: 10px; background: #000; margin-top: 20px; font-size: 14px; }
+        .hint-btn { cursor: pointer; color: #888; text-decoration: underline; background: none; border: none; font-family: monospace; font-size: 14px; padding: 0; }
+        .hint-btn:hover { color: #ccc; }
+        .hint-text { display: none; color: #00ff00; margin-top: 10px; border-left: 2px solid #00ff00; padding-left: 10px; }
     </style>
 </head>
 <body>
@@ -23,22 +26,59 @@
         <p>The Hunter tagged their file with the word <strong>BOUNTY</strong>. You must find it in the log below.</p>
 
         <h3>Action Steps</h3>
-        <p>Scrolling will take too long. Work smarter, not harder.</p>
-        <p>Use your keyboard: Press <strong>Ctrl + F</strong> (or Cmd + F on a Mac) to open the search tool. Type the word BOUNTY to instantly jump to the hidden flag.</p>
+        <p>Scrolling line by line will take too long. A good analyst doesn't read every log; they filter out the noise. Think about how you can scan a large document for a specific keyword without using your eyes.</p>
         
-        <div class="log-box">
-            <script>
-                // Generates the wall of text - increased to 3000 to punish manual scrolling
-                for(let i = 1; i <= 3000; i++) {
-                    if (i === 1842) {
-                        // The flag is now perfectly camouflaged in the standard green text
-                        document.write("<p>Log Entry " + i + ": Connection stable. TCP packet verified. BOUNTY: FLAG{ANALYST_BOUNTY_FOUND}. No anomalies detected.</p>");
-                    } else {
-                        document.write("<p>Log Entry " + i + ": Connection stable. TCP packet verified. No anomalies detected.</p>");
-                    }
-                }
-            </script>
+        <button class="hint-btn" onclick="document.getElementById('reveal').style.display='block'">Need a technical hint? Click here.</button>
+        <div id="reveal" class="hint-text">
+            <p>Your web browser has a built-in search tool to filter text. Try pressing <strong>Ctrl + F</strong> (or Cmd + F on a Mac) to open it, and type your target word.</p>
+        </div>
+        
+        <div class="log-box" id="log-container">
+            <!-- Logs are generated dynamically by the script -->
         </div>
     </div>
+
+    <script>
+        const logContainer = document.getElementById('log-container');
+        const totalLines = 3000;
+        
+        // Array of normal, randomized digital chatter
+        const normalLogs = [
+            "Connection stable. TCP packet verified. No anomalies detected.",
+            "Heartbeat acknowledged. Server latency: 14ms.",
+            "Auth token refreshed successfully for user system_svc.",
+            "Firewall rule #44 applied: inbound traffic allowed on port 443.",
+            "Cron job execution complete. Memory cleared.",
+            "DNS query resolved. Cache updated.",
+            "User telemetry synced. Session duration: 420s.",
+            "Background process PID 4092 running nominally."
+        ];
+
+        // Randomly select where the bounty will be hidden (between line 200 and 2800)
+        const bountyIndex = Math.floor(Math.random() * (2800 - 200 + 1)) + 200; 
+        
+        let logHTML = "";
+
+        // Generates the wall of text
+        for (let i = 1; i <= totalLines; i++) {
+            // Generate a random timestamp for realism
+            let hours = String(Math.floor(Math.random() * 24)).padStart(2, '0');
+            let mins = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+            let secs = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+            let timestamp = `[${hours}:${mins}:${secs}]`;
+
+            if (i === bountyIndex) {
+                // The flag is camouflaged inside standard text
+                logHTML += `<p>${timestamp} Log Entry ${i}: Connection stable. TCP packet verified. BOUNTY: FLAG{ANALYST_BOUNTY_FOUND}. No anomalies detected.</p>`;
+            } else {
+                // Pick a random log message from the array
+                let randomMsg = normalLogs[Math.floor(Math.random() * normalLogs.length)];
+                logHTML += `<p>${timestamp} Log Entry ${i}: ${randomMsg}</p>`;
+            }
+        }
+
+        // Push the entire string to the DOM at once for better performance
+        logContainer.innerHTML = logHTML;
+    </script>
 </body>
 </html>

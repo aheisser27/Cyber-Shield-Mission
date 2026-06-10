@@ -88,7 +88,7 @@
             
             <div style="margin-top: 20px; background: #1f1b24; padding: 15px; border-radius: 4px; border-left: 4px solid #d2a8ff;">
                 <h3 style="margin-top: 0; color: #d2a8ff;">Suspect File Attachment</h3>
-                <a href="real_suspect.jpg" download="real_suspect.jpg" style="display: inline-block; padding: 10px 15px; background: #d2a8ff; color: #0d1117; text-decoration: none; font-weight: bold; border-radius: 4px;">
+                <a id="suspect-download-btn" href="#" download="" style="display: inline-block; padding: 10px 15px; background: #d2a8ff; color: #0d1117; text-decoration: none; font-weight: bold; border-radius: 4px;">
                     💾 Download suspect_file.jpg
                 </a>
             </div>
@@ -134,7 +134,11 @@
         function loadLevelData() {
             generateRealisticLogs();
             document.getElementById("l3-flag-text").innerText = keys[currentTeam][2];
-            // Level 4 text is statically Base64 encoded in the HTML above so all teams get the same instruction.
+            
+            // DYNAMIC DOWNLOAD LINK LOGIC
+            const downloadBtn = document.getElementById("suspect-download-btn");
+            downloadBtn.href = `suspect_${currentTeam.toLowerCase()}.jpg`;
+            downloadBtn.download = `suspect_${currentTeam.toLowerCase()}.jpg`;
         }
 
         function generateRealisticLogs() {
@@ -181,7 +185,7 @@
             if(currentLevel <= 4) {
                 document.getElementById(`level-${currentLevel}`).style.display = "block";
                 
-                // If they just unlocked Level 2, trigger the Ghost Console Log
+                // Trigger Ghost Console Log when Level 2 unlocks
                 if(currentLevel === 2) {
                     console.clear();
                     console.log(`%c[SYSTEM ALERT] %cBackground Process Detected. Ghost Flag: ${keys[currentTeam][1]}`, "color: red; font-weight: bold;", "color: green;");

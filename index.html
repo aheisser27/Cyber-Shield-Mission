@@ -10,25 +10,21 @@
         h1, h2, h3 { color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
         .briefing { background: #0d1117; padding: 15px; border-left: 4px solid #238636; margin-bottom: 20px; border-radius: 4px; }
         
-        /* Level Visibility Controls */
         .level-section { display: none; margin-top: 30px; padding-top: 20px; border-top: 2px dashed #30363d; }
         
-        /* Submission Box */
         .submit-area { background: #21262d; padding: 20px; border-radius: 6px; margin-top: 20px; text-align: center; }
         input[type="text"] { padding: 10px; width: 60%; font-family: monospace; border: 1px solid #30363d; background: #0d1117; color: #58a6ff; border-radius: 4px; }
         button { padding: 10px 20px; background: #238636; color: white; border: none; cursor: pointer; border-radius: 4px; font-weight: bold; }
         button:hover { background: #2ea043; }
         #error-msg { color: #f85149; display: none; margin-top: 10px; font-weight: bold; }
 
-        /* Level 1 Specific */
+        /* Level 1: Logs */
+        .log-box { height: 350px; overflow-y: scroll; border: 1px solid #30363d; padding: 10px; background: #010409; font-family: monospace; font-size: 11px; color: #3fb950; margin-top: 15px;}
+        .log-line { margin: 2px 0; border-bottom: 1px solid #0d1117; padding-bottom: 2px; }
+        
+        /* Level 3: Obstacle */
         .obstacle-container { position: relative; width: 100%; height: 100px; background: #fff; border: 2px solid #58a6ff; text-align: center; line-height: 100px; font-size: 24px; font-weight: bold; color: black; font-family: monospace; border-radius: 4px; overflow: hidden; }
         .black-box-obstacle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10; cursor: not-allowed; display: flex; align-items: center; justify-content: center; color: red; font-size: 14px; }
-        
-        /* Level 2 Specific */
-        .log-box { height: 300px; overflow-y: scroll; border: 1px solid #30363d; padding: 10px; background: #010409; font-family: monospace; font-size: 12px; color: #3fb950; margin-top: 15px;}
-        
-        /* Level 3 Specific */
-        .cipher-box { background: #010409; border: 1px dashed #d2a8ff; padding: 15px; word-wrap: break-word; font-family: monospace; color: #d2a8ff; margin-bottom: 10px;}
     </style>
 </head>
 <body>
@@ -36,64 +32,65 @@
     <div class="container" id="setup-screen">
         <h1>🛡️ Cyber Shield Mission Setup</h1>
         <div class="briefing">
-            <strong>Welcome, Defender.</strong> Please select your assigned team room below to initialize your specific mission parameters.
+            <strong>Initialization Required.</strong> Select your unit's assigned mission track to load parameters.
         </div>
-        <select id="team-selector" style="padding: 10px; font-size: 16px; background: #0d1117; color: white; border: 1px solid #30363d;">
-            <option value="none">-- Select Your Team --</option>
+        <select id="team-selector" style="padding: 10px; font-size: 16px; background: #0d1117; color: white; border: 1px solid #30363d; border-radius: 4px;">
+            <option value="none">-- Select Team --</option>
             <option value="Red">Team Red</option>
             <option value="Blue">Team Blue</option>
             <option value="Green">Team Green</option>
             <option value="Yellow">Team Yellow</option>
         </select>
-        <button onclick="startGame()">Initialize Mission</button>
+        <button onclick="startGame()">Start Mission</button>
     </div>
 
     <div class="container level-section" id="mission-ui">
         <h1 id="team-display">Mission Dashboard</h1>
         
         <div id="level-1" class="level-content">
-            <h2>Level 1: The Obstacle</h2>
+            <h2>Level 1: The Noise</h2>
             <div class="briefing">
-                <p><strong>Skill:</strong> DOM Manipulation (Inspect Element)</p>
-                <p>The Hunter left a flag here, but covered it with a security block. A regular user would just give up. You need to right-click the black box below, click "Inspect", and delete the HTML element (<code>&lt;div class="black-box-obstacle"&gt;</code>) from the code to see what is underneath it.</p>
-            </div>
-            <div class="obstacle-container">
-                <span id="l1-flag-text">ERROR: FLAG NOT LOADED</span>
-                <div class="black-box-obstacle">SECURITY BLOCK ACTIVATED - DO NOT REMOVE</div>
-            </div>
-        </div>
-
-        <div id="level-2" class="level-content" style="display: none;">
-            <h2>Level 2: The Noise</h2>
-            <div class="briefing">
-                <p><strong>Skill:</strong> Log Analysis & Filtering</p>
-                <p>We captured the server logs. The Hunter hid the next flag inside thousands of lines of normal chatter. Do not read this manually. Click inside the log box and use <strong>Ctrl + F</strong> to search for the word <strong>BOUNTY</strong>.</p>
+                <p>The Hunter has breached the database. We have captured 3,000 lines of system telemetry. The Hunter tagged their exfiltrated data with the word <strong>BOUNTY</strong>. You must find it.</p>
+                <p style="color: #8b949e; font-style: italic;">Hint: Scrolling manually will take too long. Think about how you can search through a massive document instantly.</p>
             </div>
             <div class="log-box" id="log-container"></div>
         </div>
 
-        <div id="level-3" class="level-content" style="display: none;">
-            <h2>Level 3: The Cipher & The File</h2>
+        <div id="level-2" class="level-content" style="display: none;">
+            <h2>Level 2: The Ghost</h2>
             <div class="briefing">
-                <p><strong>Skill:</strong> Cryptography via CyberChef</p>
-                <p>We intercepted scrambled text. Go to <a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #58a6ff;">CyberChef</a>. Copy the text below, paste it into the Input, and use the <strong>From Base64</strong> recipe to decode your flag.</p>
+                <p>The next flag isn't written on this page. It isn't in the HTML source code. The Hunter is executing it in a background script.</p>
+                <p style="color: #8b949e; font-style: italic;">Hint: How can we look deeper into this webpage? Think about the developer tools you use to inspect a page's inner workings.</p>
             </div>
-            <div class="cipher-box" id="l3-cipher-text">ERROR</div>
-            
-            <div class="briefing" style="margin-top: 20px; background: #1f1b24; border-left: 4px solid #d2a8ff;">
-                <p><strong>Bonus Meta-Data Intel:</strong> The Hunter dropped a file during the breach. Download the image below. Right-click the downloaded file on your computer, go to Properties -> Details, and look for the hidden flag in the comments!</p>
-                
-                <a href="real_suspect.jpg" download="real_suspect.jpg" style="display: inline-block; padding: 10px 15px; background: #d2a8ff; color: #0d1117; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 10px;">
-                    💾 Download Suspect File
-                </a>
+        </div>
+
+        <div id="level-3" class="level-content" style="display: none;">
+            <h2>Level 3: The Obstacle</h2>
+            <div class="briefing">
+                <p>The Hunter left a hidden flag, but they placed a "Security Block" in the code to physically hide it from your view.</p>
+                <p style="color: #8b949e; font-style: italic;">Hint: You need to move this blocker. How can we edit the HTML code to remove that block and find what's underneath?</p>
+            </div>
+            <div class="obstacle-container">
+                <span id="l3-flag-text">ERROR: FLAG NOT LOADED</span>
+                <div class="black-box-obstacle">SECURITY BLOCK ACTIVATED - ENCRYPTION ACTIVE</div>
             </div>
         </div>
 
         <div id="level-4" class="level-content" style="display: none;">
-            <h2>Level 4: The Ghost</h2>
+            <h2>Level 4: The Cipher</h2>
             <div class="briefing">
-                <p><strong>Skill:</strong> Developer Console Diagnostics</p>
-                <p>The final flag isn't on the page. It isn't in the HTML source code. The Hunter injected a background script that is running silently. Press <strong>F12</strong> (or right-click -> Inspect) and navigate to the <strong>Console</strong> tab to find the ghost in the machine.</p>
+                <p>We intercepted scrambled text. What encryption method usually ends in <strong>==</strong>? Do your research.</p>
+                <p>Use <a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #58a6ff;">CyberChef</a> to decode this message to find your next instruction.</p>
+            </div>
+            <div style="background: #010409; border: 1px dashed #d2a8ff; padding: 15px; font-family: monospace; color: #d2a8ff; word-wrap: break-word;" id="l4-cipher-text">
+                VEFSR0VUIEFDUVVJUkVEOiBDSEVDSyBUSEUgTUVUQURBVEEgQ09NTUVOVFMgSU4gVEhFIFNVU1BFQ1QgRklMRSBCRUxPVw==
+            </div>
+            
+            <div style="margin-top: 20px; background: #1f1b24; padding: 15px; border-radius: 4px; border-left: 4px solid #d2a8ff;">
+                <h3 style="margin-top: 0; color: #d2a8ff;">Suspect File Attachment</h3>
+                <a href="real_suspect.jpg" download="real_suspect.jpg" style="display: inline-block; padding: 10px 15px; background: #d2a8ff; color: #0d1117; text-decoration: none; font-weight: bold; border-radius: 4px;">
+                    💾 Download suspect_file.jpg
+                </a>
             </div>
         </div>
 
@@ -101,20 +98,19 @@
             <h3>Enter Current Flag to Advance</h3>
             <input type="text" id="flag-input" placeholder="FLAG{...}">
             <button onclick="checkFlag()">Submit Flag</button>
-            <p id="error-msg">ACCESS DENIED: Incorrect Flag.</p>
+            <p id="error-msg">ACCESS DENIED: Hash Mismatch.</p>
             <p id="success-msg" style="color: #3fb950; display: none; font-weight: bold; margin-top: 10px;">FLAG ACCEPTED. DECRYPTING NEXT LEVEL...</p>
         </div>
         
         <div id="victory-screen" style="display: none; text-align: center; padding: 40px;">
-            <h1 style="color: #3fb950;">🏆 MISSION ACCOMPLISHED</h1>
-            <p>You have successfully penetrated the Hunter's defenses.</p>
-            <h3 style="color: #d2a8ff;">Your Team's Final Decoded Sentence:</h3>
+            <h1 style="color: #3fb950;">🏆 MISSION SUCCESS</h1>
+            <h3 style="color: #d2a8ff;">Team Sentence Decoded:</h3>
             <h2 id="final-sentence" style="letter-spacing: 2px;"></h2>
         </div>
     </div>
 
     <script>
-        // MASTER ANSWER KEY - Creates a sentence for each team
+        // Array Order: L1(Logs), L2(Console), L3(Obstacle), L4(Metadata)
         const keys = {
             Red: ["FLAG{Hackers}", "FLAG{Always}", "FLAG{Look}", "FLAG{Deeper}"],
             Blue: ["FLAG{Cyber}", "FLAG{Defense}", "FLAG{Requires}", "FLAG{Teamwork}"],
@@ -127,37 +123,37 @@
 
         function startGame() {
             const selector = document.getElementById("team-selector");
-            if(selector.value === "none") { alert("Please select a team!"); return; }
-            
+            if(selector.value === "none") { alert("Select a Team!"); return; }
             currentTeam = selector.value;
             document.getElementById("setup-screen").style.display = "none";
             document.getElementById("mission-ui").style.display = "block";
             document.getElementById("team-display").innerText = `Mission Dashboard: Team ${currentTeam}`;
-            
             loadLevelData();
         }
 
         function loadLevelData() {
-            // Level 1: Inject flag under the black box
-            document.getElementById("l1-flag-text").innerText = keys[currentTeam][0];
-
-            // Level 2: Generate logs
-            generateLogs();
-
-            // Level 3: Encode the flag in Base64
-            document.getElementById("l3-cipher-text").innerText = btoa(keys[currentTeam][2]);
+            generateRealisticLogs();
+            document.getElementById("l3-flag-text").innerText = keys[currentTeam][2];
+            // Level 4 text is statically Base64 encoded in the HTML above so all teams get the same instruction.
         }
 
-        function generateLogs() {
+        function generateRealisticLogs() {
             const container = document.getElementById('log-container');
+            const services = ["AUTH_GATEWAY", "DB_DAEMON", "NET_TRAFFIC", "DNS_RESOLVER", "AZURE_AD", "FIREWALL_V4", "SEC_AUDIT"];
+            const msgs = ["Handshake successful", "Packet verified", "Unauthorized login blocked", "Heartbeat: OK", "Token refreshed", "Query successful"];
             let logHTML = "";
-            const bountyIndex = Math.floor(Math.random() * (1500 - 500 + 1)) + 500; 
+            const bountyIndex = Math.floor(Math.random() * (2500 - 500)) + 500;
             
-            for (let i = 1; i <= 2000; i++) {
+            for (let i = 1; i <= 3000; i++) {
+                let time = `${String(Math.floor(Math.random()*24)).padStart(2,'0')}:${String(Math.floor(Math.random()*60)).padStart(2,'0')}:${String(Math.floor(Math.random()*60)).padStart(2,'0')}`;
+                let service = services[Math.floor(Math.random()*services.length)];
+                let ip = `192.168.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+                
                 if (i === bountyIndex) {
-                    logHTML += `<p>Log ${i} [SYS_OK]: TCP packet verified. BOUNTY: ${keys[currentTeam][1]} No anomalies.</p>`;
+                    logHTML += `<div class="log-line">[${time}] [CRIT] ${service} from ${ip}: ALERT - BOUNTY TAG: ${keys[currentTeam][0]} - DATA EXFIL DETECTED</div>`;
                 } else {
-                    logHTML += `<p>Log ${i} [SYS_OK]: Heartbeat acknowledged. Latency: ${Math.floor(Math.random() * 50)}ms.</p>`;
+                    let msg = msgs[Math.floor(Math.random()*msgs.length)];
+                    logHTML += `<div class="log-line">[${time}] [INFO] ${service} from ${ip}: ${msg}</div>`;
                 }
             }
             container.innerHTML = logHTML;
@@ -165,22 +161,16 @@
 
         function checkFlag() {
             const input = document.getElementById("flag-input").value.trim();
-            const errorMsg = document.getElementById("error-msg");
-            const successMsg = document.getElementById("success-msg");
-            
-            // Check against current level's answer (Arrays are 0-indexed, so Level 1 = index 0)
             if(input === keys[currentTeam][currentLevel - 1]) {
-                errorMsg.style.display = "none";
-                successMsg.style.display = "block";
-                document.getElementById("flag-input").value = ""; // Clear input
-                
+                document.getElementById("error-msg").style.display = "none";
+                document.getElementById("success-msg").style.display = "block";
+                document.getElementById("flag-input").value = ""; // Clear the box
                 setTimeout(() => {
-                    successMsg.style.display = "none";
+                    document.getElementById("success-msg").style.display = "none";
                     advanceLevel();
-                }, 1500);
+                }, 1000);
             } else {
-                errorMsg.style.display = "block";
-                successMsg.style.display = "none";
+                document.getElementById("error-msg").style.display = "block";
             }
         }
 
@@ -191,23 +181,16 @@
             if(currentLevel <= 4) {
                 document.getElementById(`level-${currentLevel}`).style.display = "block";
                 
-                // If they reached Level 4, trigger the console log
-                if(currentLevel === 4) {
+                // If they just unlocked Level 2, trigger the Ghost Console Log
+                if(currentLevel === 2) {
                     console.clear();
-                    console.warn("WARNING: Unauthorized access attempt blocked.");
-                    console.log("Diagnostic complete. Threat isolated.");
-                    console.log(`Here is your Elite Bounty: ${keys[currentTeam][3]}`);
+                    console.log(`%c[SYSTEM ALERT] %cBackground Process Detected. Ghost Flag: ${keys[currentTeam][1]}`, "color: red; font-weight: bold;", "color: green;");
                 }
             } else {
-                // Victory Condition
                 document.getElementById("submit-area").style.display = "none";
                 document.getElementById("victory-screen").style.display = "block";
-                
-                // Build and display the final sentence
-                let rawSentence = keys[currentTeam].join(" ");
-                // Remove the "FLAG{" and "}" to make it readable
-                let cleanSentence = rawSentence.replace(/FLAG\{/g, "").replace(/\}/g, "");
-                document.getElementById("final-sentence").innerText = cleanSentence;
+                let sentence = keys[currentTeam].join(" ").replace(/FLAG\{/g, "").replace(/\}/g, "");
+                document.getElementById("final-sentence").innerText = sentence;
             }
         }
     </script>

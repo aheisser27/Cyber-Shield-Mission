@@ -20,7 +20,7 @@ To solve the logistical challenge of large classrooms, this CTF uses a **Team-Ba
 * **Level 4: The Ghost** * **Skill:** Browser Developer Console.
   * **Objective:** Investigate the browser's diagnostic console to find scripts executing silently in the background.
 
-## 🔑 Facilitator Master Answer Key
+## ⛔🔑 Facilitator Master Answer Key **STUDENTS DO NOT LOOK** ⛔
 *All flags must be entered exactly as written, including the FLAG{} formatting.*
 
 **Team Red (Sentence: Hackers Always Look Deeper)**

@@ -54,6 +54,7 @@ This activity is built on four core standards designed to leverage the cultural 
 2. **Resilience:** Technical errors are learning milestones, not dead ends. We stay locked onto the problem until it is solved.
 3. **Social and Familial Capital:** Cybersecurity is a team sport. If you finish your mission early, your next objective is to help the person next to you finish theirs. 
 4. **Professional Identity:** We hold ourselves to the standard of professional Cyber Defense Analysts, proving that excellence is defined by the quality of our work.
+5. **For those of you looking at this and doing the activity... PLEASE DO NOT CHEAT.
 
 ---
 *Created by Aaron Heisser for the 2026 Summer Cybersecurity Bootcamp.*

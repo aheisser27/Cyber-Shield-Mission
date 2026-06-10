@@ -55,7 +55,7 @@
             <h2>Level 1: The Obstacle</h2>
             <div class="briefing">
                 <p><strong>Skill:</strong> DOM Manipulation (Inspect Element)</p>
-                <p>The Hunter left a flag here, but covered it with a security block. A regular user would just give up. You need to right-click the black box below, click "Inspect", and delete the HTML element (`<div class="black-box-obstacle">`) from the code to see what is underneath it.</p>
+                <p>The Hunter left a flag here, but covered it with a security block. A regular user would just give up. You need to right-click the black box below, click "Inspect", and delete the HTML element (<code>&lt;div class="black-box-obstacle"&gt;</code>) from the code to see what is underneath it.</p>
             </div>
             <div class="obstacle-container">
                 <span id="l1-flag-text">ERROR: FLAG NOT LOADED</span>
@@ -73,7 +73,7 @@
         </div>
 
         <div id="level-3" class="level-content" style="display: none;">
-            <h2>Level 3: The Cipher</h2>
+            <h2>Level 3: The Cipher & The File</h2>
             <div class="briefing">
                 <p><strong>Skill:</strong> Cryptography via CyberChef</p>
                 <p>We intercepted scrambled text. Go to <a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #58a6ff;">CyberChef</a>. Copy the text below, paste it into the Input, and use the <strong>From Base64</strong> recipe to decode your flag.</p>
@@ -87,6 +87,7 @@
                     💾 Download Suspect File
                 </a>
             </div>
+        </div>
 
         <div id="level-4" class="level-content" style="display: none;">
             <h2>Level 4: The Ghost</h2>
@@ -195,4 +196,20 @@
                     console.clear();
                     console.warn("WARNING: Unauthorized access attempt blocked.");
                     console.log("Diagnostic complete. Threat isolated.");
-                    console.log(`Here is your Elite Bounty:
+                    console.log(`Here is your Elite Bounty: ${keys[currentTeam][3]}`);
+                }
+            } else {
+                // Victory Condition
+                document.getElementById("submit-area").style.display = "none";
+                document.getElementById("victory-screen").style.display = "block";
+                
+                // Build and display the final sentence
+                let rawSentence = keys[currentTeam].join(" ");
+                // Remove the "FLAG{" and "}" to make it readable
+                let cleanSentence = rawSentence.replace(/FLAG\{/g, "").replace(/\}/g, "");
+                document.getElementById("final-sentence").innerText = cleanSentence;
+            }
+        }
+    </script>
+</body>
+</html>

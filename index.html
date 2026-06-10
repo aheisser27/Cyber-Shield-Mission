@@ -109,17 +109,23 @@
         </div>
     </div>
 
-    <script>
+<script>
+        // Flags are now Base64 encoded to prevent students from cheating via "View Source".
         // Array Order: L1(Logs), L2(Console), L3(Obstacle), L4(Metadata)
         const keys = {
-            Red: ["FLAG{Hackers}", "FLAG{Always}", "FLAG{Look}", "FLAG{Deeper}"],
-            Blue: ["FLAG{Cyber}", "FLAG{Defense}", "FLAG{Requires}", "FLAG{Teamwork}"],
-            Green: ["FLAG{Inspect}", "FLAG{Every}", "FLAG{Hidden}", "FLAG{Detail}"],
-            Yellow: ["FLAG{Security}", "FLAG{Built}", "FLAG{On}", "FLAG{Resilience}"]
+            Red: ["RkxBR3tIYWNrZXJzfQ==", "RkxBR3tBbHdheXN9", "RkxBR3tMb29rfQ==", "RkxBR3tEZWVwZXJ9"],
+            Blue: ["RkxBR3tDeWJlcn0=", "RkxBR3tEZWZlbnNlfQ==", "RkxBR3tSZXF1aXJlc30=", "RkxBR3tUZWFtd29ya30="],
+            Green: ["RkxBR3tJbnNwZWN0fQ==", "RkxBR3tFdmVyeX0=", "RkxBR3tIaWRkZW59", "RkxBR3tEZXRhaWx9"],
+            Yellow: ["RkxBR3tTZWN1cml0eX0=", "RkxBR3tCdWlsdH0=", "RkxBR3tPbn0=", "RkxBR3tSZXNpbGllbmNlfQ=="]
         };
 
         let currentTeam = "";
         let currentLevel = 1;
+
+        // Helper function to decode flags on the fly
+        function getFlag(team, index) {
+            return atob(keys[team][index]);
+        }
 
         function startGame() {
             const selector = document.getElementById("team-selector");
@@ -133,7 +139,7 @@
 
         function loadLevelData() {
             generateRealisticLogs();
-            document.getElementById("l3-flag-text").innerText = keys[currentTeam][2];
+            document.getElementById("l3-flag-text").innerText = getFlag(currentTeam, 2);
             
             // DYNAMIC DOWNLOAD LINK LOGIC
             const downloadBtn = document.getElementById("suspect-download-btn");
@@ -154,7 +160,8 @@
                 let ip = `192.168.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
                 
                 if (i === bountyIndex) {
-                    logHTML += `<div class="log-line">[${time}] [CRIT] ${service} from ${ip}: ALERT - BOUNTY TAG: ${keys[currentTeam][0]} - DATA EXFIL DETECTED</div>`;
+                    // Decodes L1 flag just in time to inject it into the logs
+                    logHTML += `<div class="log-line">[${time}] [CRIT] ${service} from ${ip}: ALERT - BOUNTY TAG: ${getFlag(currentTeam, 0)} - DATA EXFIL DETECTED</div>`;
                 } else {
                     let msg = msgs[Math.floor(Math.random()*msgs.length)];
                     logHTML += `<div class="log-line">[${time}] [INFO] ${service} from ${ip}: ${msg}</div>`;
@@ -165,10 +172,11 @@
 
         function checkFlag() {
             const input = document.getElementById("flag-input").value.trim();
-            if(input === keys[currentTeam][currentLevel - 1]) {
+            // Checks user input against the decoded flag
+            if(input === getFlag(currentTeam, currentLevel - 1)) {
                 document.getElementById("error-msg").style.display = "none";
                 document.getElementById("success-msg").style.display = "block";
-                document.getElementById("flag-input").value = ""; // Clear the box
+                document.getElementById("flag-input").value = ""; 
                 setTimeout(() => {
                     document.getElementById("success-msg").style.display = "none";
                     advanceLevel();
@@ -188,15 +196,15 @@
                 // Trigger Ghost Console Log when Level 2 unlocks
                 if(currentLevel === 2) {
                     console.clear();
-                    console.log(`%c[SYSTEM ALERT] %cBackground Process Detected. Ghost Flag: ${keys[currentTeam][1]}`, "color: red; font-weight: bold;", "color: green;");
+                    console.log(`%c[SYSTEM ALERT] %cBackground Process Detected. Ghost Flag: ${getFlag(currentTeam, 1)}`, "color: red; font-weight: bold;", "color: green;");
                 }
             } else {
                 document.getElementById("submit-area").style.display = "none";
                 document.getElementById("victory-screen").style.display = "block";
-                let sentence = keys[currentTeam].join(" ").replace(/FLAG\{/g, "").replace(/\}/g, "");
+                
+                // Decodes the entire array to build the final victory sentence
+                let sentence = keys[currentTeam].map(encodedFlag => atob(encodedFlag)).join(" ").replace(/FLAG\{/g, "").replace(/\}/g, "");
                 document.getElementById("final-sentence").innerText = sentence;
             }
         }
     </script>
-</body>
-</html>
